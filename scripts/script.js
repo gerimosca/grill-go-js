@@ -32,3 +32,9 @@ while (cantidadHamburguesas < 10) {
     cantidadHamburguesas = cantidadHamburguesas + 1;
     console.log ("Ciclo hamburguesa " + cantidadHamburguesas);
     }
+
+function costeHamburguesas(hamburguesa1, hamburguesa2, delivery1){
+    console.log(hamburguesa1 + hamburguesa2 + delivery1);
+}
+
+costeHamburguesas (800, 1200, 300)
