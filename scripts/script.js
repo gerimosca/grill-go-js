@@ -1,40 +1,60 @@
-const nombre = prompt('Ingresá tu nombre y apellido');
-    alert ('Hola ' + nombre +'!' + ' ' + 'Bienvenid@ a Grill & Go');
+// Objetos de hamburguesa
 
-const tipoDeHamburguesa = prompt('Querés una hamburguesa simple, doble o triple?')
-    if (tipoDeHamburguesa == 'simple') {
-        alert('La hamburguesa simple te costará 500$.')
-    }
-    else if (tipoDeHamburguesa == 'doble') {
-        alert('La hamburguesa doble te costará 800$.')
-    }
-    else if (tipoDeHamburguesa == 'triple') {
-        alert('La hamburguesa triple te costará 1200$.')
-    }
-    else {
-        alert('Elegí bien la hamburguesa para saber cuanto te costará.')
-    }
-const direccion = prompt('A que dirección querés que te enviemos el pedido?');
+const hamburguesa1 = {
+  nombre: 'Classic Burger',
+  ingredientes: ['carne', 'rucula', 'tomate', 'queso', 'salsa'],
+  precio: 9.5,
+};
 
-let direccionCorrecta = prompt('Es correcta la dirección ' + direccion + '?' );
+const hamburguesa2 = {
+  nombre: 'Vegetarian Burger',
+  ingredientes: ['falafel', 'lechuga', 'tomate', 'queso vegano', 'salsa vegana'],
+  precio: 8.5,
+};
 
-    if (direccionCorrecta === 'si') {
-        alert('Perfecto! ' + nombre + ' Te enviaremos el pedido a ' + direccion + '.');
-    }
-    else {
-        alert( nombre + ', no te preocupes. Indicanos la dirección correcta');
-    }
+const hamburguesa3 = {
+  nombre: 'doble burger',
+  ingredientes: ['carne doble', 'lechuga', 'zanahoria', 'queso cheddar', 'mayonesa'],
+  precio: 12.5,
+};
 
+// Array hamburguesas
+const hamburguesas = [hamburguesa1, hamburguesa2, hamburguesa3];
 
-let cantidadHamburguesas = Number(prompt('Indicá la cantidad de hamburguesas'));
-    alert ("Pediste " + cantidadHamburguesas + ' ' + 'hamburguesas.'); 
-while (cantidadHamburguesas < 10) {
-    cantidadHamburguesas = cantidadHamburguesas + 1;
-    console.log ("Ciclo hamburguesa " + cantidadHamburguesas);
-    }
+// Function por nombre
+const searchBurgerForName = (nombre) => {
+  const nombreMinuscula = nombre.toLowerCase();
+  return hamburguesas.find((hamburguesa) => hamburguesa.nombre.toLowerCase() === nombreMinuscula);
+};
 
-function costeHamburguesas(hamburguesa1, hamburguesa2, delivery1){
-    console.log(hamburguesa1 + hamburguesa2 + delivery1);
-}
+// Function filtrado ingredientes
+const filtrarHamburguesasPorIngrediente = (ingrediente) => {
+  return hamburguesas.filter((hamburguesa) => hamburguesa.ingredientes.includes(ingrediente));
+};
 
-costeHamburguesas (800, 1200, 300)
+// Function final
+const main = () => {
+  const nombreHamburguesa = prompt('Ingresá el nombre de la hamburguesa:');
+  const hamburguesaBuscada = searchBurgerForName(nombreHamburguesa);
+
+  if (hamburguesaBuscada) {
+    console.log(`¡¡La tenemos..!!
+        Nombre: ${hamburguesaBuscada.nombre}
+        Ingredientes: ${hamburguesaBuscada.ingredientes.join(', ')}
+        Precio: €${hamburguesaBuscada.precio}`);
+
+    alert(`El precio de ${hamburguesaBuscada.nombre} es €${hamburguesaBuscada.precio}`);
+  } else {
+    console.log('Lo sentimos, no se encontró esta hamburguesa en el menú.');
+    alert('Lo sentimos, no se encontró esta hamburguesa en el menú');
+  }
+
+  const ingredienteFiltrar = prompt('Ingresá un ingrediente para filtrar las hamburguesas:');
+
+  const hamburguesasFiltradas = filtrarHamburguesasPorIngrediente(ingredienteFiltrar);
+
+  console.log(`Hamburguesas con ${ingredienteFiltrar}:
+  ${hamburguesasFiltradas.map((hamburguesa) => hamburguesa.nombre).join(', ')}`);
+};
+
+main();
